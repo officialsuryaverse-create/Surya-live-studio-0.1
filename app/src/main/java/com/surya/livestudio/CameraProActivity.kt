@@ -22,6 +22,7 @@ class CameraProActivity : AppCompatActivity() {
     private var camera: Camera? = null
     private var lensFacing = CameraSelector.LENS_FACING_BACK
     private var portrait = true
+    private var flashEnabled = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +49,11 @@ class CameraProActivity : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.btnRotate).setOnClickListener {
+        findViewById<Button>(R.id.btnFlash).setOnClickListener {
+            flashEnabled = !flashEnabled
+            camera?.cameraControl?.enableTorch(flashEnabled)
+        }
+
             portrait = !portrait
             requestedOrientation =
                 if (portrait)
