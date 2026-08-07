@@ -12,7 +12,7 @@ android {
         minSdk = 24
         targetSdk = 35
         versionCode = 1
-nano app/build.gradle.kts        versionName = "0.1"
+        versionName = "0.1"
     }
 
     buildTypes {
@@ -40,12 +40,8 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.2.1")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.9.2")
 
-    implementation("andro
-idx.camera:camera-camera2:1.4.2")
+    implementation("androidx.camera:camera-camera2:1.4.2")
     implementation("androidx.camera:camera-lifecycle:1.4.2")
     implementation("androidx.camera:camera-view:1.4.2")
     implementation("androidx.camera:camera-video:1.4.2")
-
 }
-
-
