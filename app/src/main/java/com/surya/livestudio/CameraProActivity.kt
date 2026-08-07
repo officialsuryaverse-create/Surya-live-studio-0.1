@@ -49,6 +49,10 @@ class CameraProActivity : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.btnRotate).setOnClickListener {
+        findViewById<Button>(R.id.btnLive).setOnClickListener {
+            android.widget.Toast.makeText(this,"Live Coming Soon",android.widget.Toast.LENGTH_SHORT).show()
+        }
+
         findViewById<Button>(R.id.btnFlash).setOnClickListener {
             flashEnabled = !flashEnabled
             camera?.cameraControl?.enableTorch(flashEnabled)
