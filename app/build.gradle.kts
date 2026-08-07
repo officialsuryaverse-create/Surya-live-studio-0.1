@@ -43,4 +43,8 @@ dependencies {
     implementation("androidx.camera:camera-camera2:1.4.2")
     implementation("androidx.camera:camera-lifecycle:1.4.2")
     implementation("androidx.camera:camera-view:1.4.2")
+    implementation("androidx.camera:camera-video:1.4.2")
+
+    implementation("com.github.pedroSG94.RootEncoder:library:2.5.9")
+    implementation("com.github.pedroSG94:rtmp-rtsp-stream-client-java:2.5.9")
 }
