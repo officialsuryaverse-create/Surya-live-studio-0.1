@@ -1,6 +1,7 @@
 package com.surya.livestudio
 
 import android.Manifest
+import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.widget.Button
@@ -16,6 +17,7 @@ class CameraProActivity : AppCompatActivity() {
 
     private lateinit var previewView: PreviewView
     private var lensFacing = CameraSelector.LENS_FACING_BACK
+    private var portrait = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +33,16 @@ class CameraProActivity : AppCompatActivity() {
                     CameraSelector.LENS_FACING_BACK
 
             startCamera()
+        }
+
+        findViewById<Button>(R.id.btnRotate).setOnClickListener {
+            portrait = !portrait
+
+            requestedOrientation =
+                if (portrait)
+                    ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+                else
+                    ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
         }
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
@@ -50,7 +62,6 @@ class CameraProActivity : AppCompatActivity() {
         val future = ProcessCameraProvider.getInstance(this)
 
         future.addListener({
-
             val provider = future.get()
 
             val preview = Preview.Builder().build()
