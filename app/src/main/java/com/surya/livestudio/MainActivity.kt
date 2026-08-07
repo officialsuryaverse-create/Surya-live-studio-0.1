@@ -11,10 +11,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val btnGoLive = findViewById<Button>(R.id.btnGoLive)
-
-        btnGoLive.setOnClickListener {
+        findViewById<Button>(R.id.btnGoLive).setOnClickListener {
             startActivity(Intent(this, GoLiveActivity::class.java))
+        }
+
+        findViewById<Button>(R.id.btnCamera).setOnClickListener {
+            startActivity(Intent(this, CameraProActivity::class.java))
         }
     }
 }
