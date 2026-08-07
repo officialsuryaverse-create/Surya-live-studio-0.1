@@ -5,7 +5,9 @@ import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.widget.Button
+import android.widget.SeekBar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.camera.core.Camera
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
@@ -16,6 +18,8 @@ import androidx.core.content.ContextCompat
 class CameraProActivity : AppCompatActivity() {
 
     private lateinit var previewView: PreviewView
+    private lateinit var zoomBar: SeekBar
+    private var camera: Camera? = null
     private var lensFacing = CameraSelector.LENS_FACING_BACK
     private var portrait = true
 
@@ -24,6 +28,15 @@ class CameraProActivity : AppCompatActivity() {
         setContentView(R.layout.activity_camera_pro)
 
         previewView = findViewById(R.id.previewView)
+        zoomBar = findViewById(R.id.zoomBar)
+
+        zoomBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar?, value: Int, fromUser: Boolean) {
+                camera?.cameraControl?.setLinearZoom(value / 100f)
+            }
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {}
+        })
 
         findViewById<Button>(R.id.btnSwitch).setOnClickListener {
             lensFacing =
@@ -31,13 +44,11 @@ class CameraProActivity : AppCompatActivity() {
                     CameraSelector.LENS_FACING_FRONT
                 else
                     CameraSelector.LENS_FACING_BACK
-
             startCamera()
         }
 
         findViewById<Button>(R.id.btnRotate).setOnClickListener {
             portrait = !portrait
-
             requestedOrientation =
                 if (portrait)
                     ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
@@ -47,12 +58,7 @@ class CameraProActivity : AppCompatActivity() {
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
             != PackageManager.PERMISSION_GRANTED) {
-
-            ActivityCompat.requestPermissions(
-                this,
-                arrayOf(Manifest.permission.CAMERA),
-                100
-            )
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), 100)
         } else {
             startCamera()
         }
@@ -72,7 +78,7 @@ class CameraProActivity : AppCompatActivity() {
                 .build()
 
             provider.unbindAll()
-            provider.bindToLifecycle(this, selector, preview)
+            camera = provider.bindToLifecycle(this, selector, preview)
 
         }, ContextCompat.getMainExecutor(this))
     }
