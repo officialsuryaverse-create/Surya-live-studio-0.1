@@ -1,49 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
 
-    <LinearLayout
+    <androidx.camera.view.PreviewView
+        android:id="@+id/previewView"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:layout_marginBottom="16dp"/>
+
+    <EditText
+        android:id="@+id/etYoutubeUrl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:hint="YouTube RTMP URL"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="GO LIVE"
-            android:textStyle="bold"
-            android:textSize="26sp"/>
+    <EditText
+        android:id="@+id/etStreamKey"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Stream Key"
+        android:layout_marginTop="10dp"/>
 
-        <EditText
-            android:id="@+id/etYoutubeUrl"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="YouTube RTMP URL"
-            android:layout_marginTop="16dp"/>
+    <EditText
+        android:id="@+id/etFacebookUrl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Facebook RTMP URL"
+        android:layout_marginTop="10dp"/>
 
-        <EditText
-            android:id="@+id/etStreamKey"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Stream Key"
-            android:layout_marginTop="12dp"/>
+    <Button
+        android:id="@+id/btnStartLive"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="START LIVE"
+        android:layout_marginTop="20dp"/>
 
-        <EditText
-            android:id="@+id/etFacebookUrl"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Facebook RTMP URL"
-            android:layout_marginTop="12dp"/>
-
-        <Button
-            android:id="@+id/btnStartLive"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="START LIVE"
-            android:layout_marginTop="24dp"/>
-
-    </LinearLayout>
-
-</ScrollView>
+</LinearLayout>
